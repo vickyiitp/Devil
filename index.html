@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vicky Kumar — AI Developer from IIT Patna | Devil Labs</title>
+    <meta name="description" content="Vicky Kumar — AI Developer (IIT Patna). Founder of Devil Labs & Team MVA. Building Generative & Agentic AI tools, cybersecurity systems, and interactive web apps." />
+    <meta name="keywords" content="IIT Patna, AI developer, Devil Labs, vickyiitp, generative AI, agentic AI, cybersecurity" />
+    <meta property="og:title" content="Vicky Kumar — AI Developer | Devil Labs" />
+    <meta property="og:description" content="Founder of Devil Labs & Team MVA. Creator of AI tools, cybersecurity apps and interactive web platforms." />
+    <meta property="og:image" content="/og-image.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://vickyiitp.tech" />
+    <link rel="icon" type="image/jpeg" href="/vicimg.jpg" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'devil-black': '#0a0a0a',
+              'devil-dark': '#111111',
+              'devil-red': '#ff003c',
+              'devil-red-dark': '#b3002b',
+              'devil-gray': '#1a1a1a',
+              'devil-light': '#f5f5f5',
+              'neon-red': '#ff073a',
+              'cyber-purple': '#9e00ff',
+              'devil-gold': '#f7b538',
+
+              // New Luxury Tokens
+              'background': '#0B1220',
+              'accent-blue': '#00D1FF',
+              'accent-gold': '#F6C85F',
+              'accent-magenta': '#FF4D8B',
+              'glass': 'rgba(255, 255, 255, 0.04)',
+            },
+            fontFamily: {
+              'sans': ['Inter', 'sans-serif'],
+              'mono': ['Roboto Mono', 'monospace'],
+            },
+            boxShadow: {
+              'neon-red': '0 0 5px #ff073a, 0 0 10px #ff073a, 0 0 20px #ff073a',
+              'neon-red-soft': '0 0 15px rgba(255, 7, 58, 0.5)',
+              'lux-glow': '0 0 15px var(--glow-color, #00D1FF), 0 0 30px var(--glow-color, #00D1FF)',
+            },
+            animation: {
+                'cyber-grid-pulse': 'cyber-grid-pulse 10s linear infinite',
+                'shimmer': 'shimmer 4s ease-in-out infinite alternate',
+                'breathing-glow': 'breathing-glow 3s ease-in-out infinite',
+            },
+            keyframes: {
+                'cyber-grid-pulse': {
+                    '0%, 100%': { opacity: 0.1 },
+                    '50%': { opacity: 0.2 },
+                },
+                'shimmer': {
+                    'from': { backgroundPosition: '200% center' },
+                    'to': { backgroundPosition: '-200% center' },
+                },
+                'breathing-glow': {
+                    '0%, 100%': {
+                        boxShadow: '0 0 10px var(--glow-color-1, rgba(255, 7, 58, 0.5)), 0 0 5px var(--glow-color-2, rgba(255, 7, 58, 0.5)) inset',
+                        borderColor: 'var(--glow-color-1, rgba(255, 7, 58, 0.5))',
+                    },
+                    '50%': {
+                        boxShadow: '0 0 20px var(--glow-color-1, rgba(255, 7, 58, 0.7)), 0 0 10px var(--glow-color-2, rgba(255, 7, 58, 0.7)) inset',
+                        borderColor: 'var(--glow-color-1, rgba(255, 7, 58, 0.7))',
+                    },
+                },
+            }
+          }
+        }
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        background-color: #0B1220;
+        color: #f5f5f5;
+        font-family: 'Inter', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      .shimmer-text {
+        background-image: linear-gradient(90deg, #00D1FF, #F6C85F, #FF4D8B, #F6C85F, #00D1FF);
+        background-size: 200% auto;
+        color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+        animation: shimmer 4s linear infinite;
+      }
+       /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0B1220;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #ff003c;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #b3002b;
+      }
+      .glassmorphic {
+        background: rgba(10, 10, 10, 0.5);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+      }
+       .lux-glass {
+        background: rgba(255, 255, 255, 0.04);
+        -webkit-backdrop-filter: blur(12px);
+        backdrop-filter: blur(12px);
+      }
+      /* Fallback SVG animation */
+      @keyframes drift {
+          0% { transform: translateY(0) translateX(0) scale(1); opacity: 0.7; }
+          50% { transform: translateY(-18px) translateX(12px) scale(1.05); opacity: 0.9; }
+          100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.7; }
+        }
+      .glow-anim {
+        transform-origin: center;
+        animation: drift 10s ease-in-out infinite;
+        mix-blend-mode: screen;
+      }
+      .delay-2000 { animation-delay: 2s; }
+      @media (prefers-reduced-motion: reduce) {
+        .glow-anim { animation: none; }
+      }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.6",
+    "framer-motion": "https://aistudiocdn.com/framer-motion@^11.1.9",
+    "three": "https://aistudiocdn.com/three@^0.164.1",
+    "three/": "https://aistudiocdn.com/three@^0.164.1/",
+    "@react-three/fiber": "https://aistudiocdn.com/react-three-fiber@^8.16.6",
+    "@react-three/drei": "https://aistudiocdn.com/react-three-drei@^9.105.6",
+    "postprocessing": "https://aistudiocdn.com/postprocessing@^6.35.4",
+    "@react-three/postprocessing": "https://aistudiocdn.com/react-three-postprocessing@^2.16.2",
+    "react-intersection-observer": "https://aistudiocdn.com/react-intersection-observer@^9.10.3"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Vicky Kumar",
+  "url": "https://vickyiitp.tech",
+  "sameAs": [
+    "https://www.linkedin.com/in/vickyiitp",
+    "https://github.com/vickyiitp",
+    "https://x.com/vickyiitp"
+  ],
+  "affiliation": {
+    "@type": "CollegeOrUniversity",
+    "name": "IIT Patna"
+  },
+  "jobTitle": "AI Developer",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Devil Labs",
+    "url": "https://vickyiitp.tech"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <div id="root"></div>
+    <script type="module" src="/src/index.tsx"></script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+fastapi==0.115.5
+uvicorn[standard]==0.32.1
+gunicorn==23.0.0
+google-generativeai==0.8.3
+python-dotenv==1.0.1
+pydantic==2.10.3
+pydantic-settings==2.6.1
+email-validator==2.3.0
+httpx==0.28.1
+python-multipart==0.0.20
+
+# Database
+sqlalchemy==2.0.36
+alembic==1.14.0
+aiosqlite==0.20.0
+greenlet==3.2.4
+
+# Cloud Storage
+azure-storage-blob==12.25.0
+pillow==11.0.0
+
+# Authentication
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+
+# Utilities
+slugify==0.0.1
+python-slugify==8.0.4

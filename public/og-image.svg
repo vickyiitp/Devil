@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
+  <defs>
+    <linearGradient id="g1" x1="0" x2="1">
+      <stop offset="0" stop-color="#00D1FF"/>
+      <stop offset="1" stop-color="#F6C85F"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="100%" height="100%" fill="#071026" />
+  <g transform="translate(60,90)">
+    <rect x="0" y="0" rx="18" width="1080" height="450" fill="url(#g1)" opacity="0.07"/>
+    <text x="40" y="110" font-family="Inter, Arial, sans-serif" font-weight="800" font-size="56" fill="white">Vicky Kumar</text>
+    <text x="40" y="170" font-family="Inter, Arial, sans-serif" font-weight="600" font-size="28" fill="#D6EFFF">AI Developer • IIT Patna • Founder @ Devil Labs</text>
+    <text x="40" y="230" font-family="Inter, Arial, sans-serif" font-size="20" fill="#B6CFEA">Generative & Agentic AI • Cybersecurity • Web Apps</text>
+
+    <g transform="translate(840,40)">
+      <circle cx="80" cy="80" r="60" fill="#0b1220" stroke="url(#g1)" stroke-width="3" filter="url(#glow)"/>
+      <text x="80" y="88" font-family="Inter, Arial, sans-serif" font-size="28" fill="#fff" text-anchor="middle" font-weight="700">V</text>
+    </g>
+  </g>
+
+  <g transform="translate(0,520)" fill="#7FB7FF" font-family="Inter, Arial, sans-serif" font-size="14">
+    <text x="60">vickyiitp.tech</text>
+  </g>
+</svg>

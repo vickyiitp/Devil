@@ -1,0 +1,1 @@
+This folder stores resume PDF attachments. Files are served statically in development and will be published to /uploads/resumes/*.
