@@ -20,8 +20,8 @@ venv/
 .env
 .venv
 env/
-backend/static_dist/
-backend/startup.sh
+# backend/static_dist/
+# backend/startup.sh
 
 # Editor directories and files
 .vscode/*
