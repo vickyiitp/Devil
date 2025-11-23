@@ -210,7 +210,14 @@ def generate_suggestions(user_message: str, response: str) -> List[str]:
 
 @app.get("/")
 async def root():
-    """Health check endpoint."""
+    """Serve the frontend root or health check."""
+    # Check if frontend build exists in static_dist
+    frontend_dist = os.path.join(os.path.dirname(__file__), 'static_dist')
+    index_path = os.path.join(frontend_dist, "index.html")
+    
+    if os.path.exists(index_path):
+        return FileResponse(index_path)
+        
     return {
         "service": "Techno Boyz API",
         "status": "online",
