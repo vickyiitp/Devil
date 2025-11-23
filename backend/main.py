@@ -212,16 +212,22 @@ def generate_suggestions(user_message: str, response: str) -> List[str]:
 async def root():
     """Serve the frontend root or health check."""
     # Check if frontend build exists in static_dist
-    frontend_dist = os.path.join(os.path.dirname(__file__), 'static_dist')
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    frontend_dist = os.path.join(current_dir, 'static_dist')
     index_path = os.path.join(frontend_dist, "index.html")
     
     if os.path.exists(index_path):
         return FileResponse(index_path)
         
+    # Debugging info if frontend is missing
     return {
         "service": "Techno Boyz API",
         "status": "online",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "error": "Frontend index.html not found",
+        "checked_path": index_path,
+        "current_directory": os.getcwd(),
+        "directory_contents": os.listdir(current_dir)
     }
 
 
