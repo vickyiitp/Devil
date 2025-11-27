@@ -21,7 +21,9 @@ interface ChatState {
   input: string;
 }
 
-const BACKEND_URL = import.meta.env.VITE_CHAT_API_URL || 'http://localhost:8000';
+// allow runtime override via window.__API_URL
+const runtimeChatUrl = (typeof window !== 'undefined' && (window as any).__API_URL) || import.meta.env.VITE_CHAT_API_URL;
+const BACKEND_URL = runtimeChatUrl || 'http://localhost:8000';
 
 export const TechnoBoyzChat: React.FC = () => {
   const [state, setState] = useState<ChatState>({

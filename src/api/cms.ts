@@ -3,7 +3,9 @@
  * Handles all API calls to the Devil Labs CMS backend
  */
 
-export const API_URL = import.meta.env.VITE_CMS_API_URL || 'http://localhost:8000';
+// runtime fallback: use window.__API_URL if set at runtime (allows changing the API host without rebuilding)
+const runtimeAPI = (typeof window !== 'undefined' && (window as any).__API_URL) || import.meta.env.VITE_CMS_API_URL;
+export const API_URL = runtimeAPI || 'http://localhost:8000';
 
 // Type definitions
 export interface Blog {

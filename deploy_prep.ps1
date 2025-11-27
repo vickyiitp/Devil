@@ -24,6 +24,13 @@ if (Test-Path $targetDir) {
 # 4. Move Build to Backend
 Write-Host " Moving build artifacts to backend..."
 Copy-Item -Recurse $distDir $targetDir
+ 
+# 4.1 Create runtime config.js to set window.__API_URL at runtime (use FRONTEND_RUNTIME_API_URL if provided, otherwise VITE_CMS_API_URL)
+$runtimeApiUrl = $env:FRONTEND_RUNTIME_API_URL
+if (-not $runtimeApiUrl) { $runtimeApiUrl = $env:VITE_CMS_API_URL }
+if (-not $runtimeApiUrl) { $runtimeApiUrl = "" }
+$configContent = "window.__API_URL = '$runtimeApiUrl';"
+Set-Content -Path "$targetDir/config.js" -Value $configContent -NoNewline
 
 # 5. Create Startup Script for Azure
 Write-Host " Creating startup.sh..."
