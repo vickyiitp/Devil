@@ -1,0 +1,1 @@
+window.__API_URL = 'https://devil-backend-iit.azurewebsites.net';
