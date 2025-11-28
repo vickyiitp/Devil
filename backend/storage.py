@@ -2,12 +2,13 @@
 Azure Blob Storage integration for media uploads
 Handles image upload, optimization, and CDN URL generation
 """
-from azure.storage.blob import BlobServiceClient, ContentSettings
+from azure.storage.blob import BlobServiceClient, ContentSettings, generate_blob_sas, BlobSasPermissions
 from PIL import Image
 import io
 import os
 from typing import Dict, Any
 from datetime import datetime, timezone
+from datetime import timedelta
 import hashlib
 from config import settings
 
@@ -100,6 +101,45 @@ class StorageService:
                 print(f"Error creating image variants: {e}")
         
         return result
+
+    def _parse_connection_string(self):
+        """Parse Azure connection string into a dict"""
+        conn_str = (settings.AZURE_STORAGE_CONNECTION_STRING or "")
+        parts = [p for p in conn_str.split(";") if p]
+        pair_map = {}
+        for p in parts:
+            if "=" in p:
+                k, v = p.split("=", 1)
+                pair_map[k] = v
+        return pair_map
+
+    def generate_presigned_url(self, blob_name: str, expiry_seconds: int = 3600) -> str:
+        """Generate an Azure Blob SAS URL for the given blob name (container relative)"""
+        if not self.blob_service_client:
+            # When running locally without Azure, return path
+            account_name = (settings.AZURE_STORAGE_CONTAINER_NAME or "")
+            return f"/uploads/{blob_name}"
+
+        # Parse connection string for account name and key
+        conn_map = self._parse_connection_string()
+        account_name = conn_map.get('AccountName')
+        account_key = conn_map.get('AccountKey') or conn_map.get('SharedAccessKey')
+        if not account_name or not account_key:
+            raise Exception("Azure storage account name/key missing; cannot generate SAS URL")
+
+        # Build SAS
+        sas_token = generate_blob_sas(
+            account_name=account_name,
+            container_name=self.container_name,
+            blob_name=blob_name,
+            account_key=account_key,
+            permission=BlobSasPermissions(read=True),
+            expiry=datetime.utcnow() + timedelta(seconds=expiry_seconds)
+        )
+
+        # Construct URL
+        blob_url = f"https://{account_name}.blob.core.windows.net/{self.container_name}/{blob_name}?{sas_token}"
+        return blob_url
     
     async def _upload_blob(
         self,

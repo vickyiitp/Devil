@@ -1,16 +1,37 @@
 
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { aboutData } from '../../data/aboutData';
+import { API_URL } from '../../api/cms';
 import { DownloadIcon } from '../../assets/icons';
 import { SectionHeader } from './SectionHeader';
 
 const resumeVersions = [
-  { name: 'One-Page Resume', description: 'A concise summary for quick reviews.', url: aboutData.resumeUrls.onePage, filename: 'Portfolio (1).pdf' },
-  { name: 'Full CV', description: 'The complete curriculum vitae with all details.', url: aboutData.resumeUrls.full, filename: 'full cv.pdf' },
-  { name: 'Technical Resume', description: 'Focused on tech skills, projects, and stack.', url: aboutData.resumeUrls.technical, filename: 'technical resume.pdf' },
+  { name: 'One-Page Resume', slug: 'onepage', description: 'A concise summary for quick reviews.', url: aboutData.resumeUrls.onePage, filename: 'Portfolio (1).pdf' },
+  { name: 'Full CV', slug: 'full', description: 'The complete curriculum vitae with all details.', url: aboutData.resumeUrls.full, filename: 'full cv.pdf' },
+  { name: 'Technical Resume', slug: 'technical', description: 'Focused on tech skills, projects, and stack.', url: aboutData.resumeUrls.technical, filename: 'technical resume.pdf' },
 ];
 
 export const ResumeSection: React.FC = () => {
+  const [loadingSlug, setLoadingSlug] = useState<string | null>(null);
+
+  const handleDownload = useCallback(async (slug: string) => {
+    try {
+      setLoadingSlug(slug);
+      const res = await fetch(`${API_URL}/api/resumes/presigned/${slug}`);
+      if (!res.ok) throw new Error('Failed to fetch presigned URL');
+      const data = await res.json();
+      if (data?.url) {
+        window.open(data.url, '_blank');
+      } else {
+        throw new Error('Invalid URL returned');
+      }
+    } catch (e) {
+      console.error('Download error', e);
+      alert('Failed to download the resume. Please try again');
+    } finally {
+      setLoadingSlug(null);
+    }
+  }, []);
   return (
     <section className="py-20 sm:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -29,14 +50,14 @@ export const ResumeSection: React.FC = () => {
               <div className="relative z-10">
                 <h3 className="text-xl font-bold text-devil-light">{resume.name}</h3>
                 <p className="text-gray-400 mt-2 text-sm">{resume.description}</p>
-                <a
-                  href={resume.url}
-                  download={resume.filename}
+                <button
+                  onClick={() => handleDownload(resume.slug)}
+                  disabled={loadingSlug !== null}
                   className="inline-flex items-center mt-6 px-4 py-2 text-sm font-bold text-devil-red bg-devil-red/10 hover:bg-devil-red hover:text-white border border-devil-red rounded-md transition-all duration-300"
                 >
                   <DownloadIcon className="h-5 w-5 mr-2" />
-                  Download
-                </a>
+                  {loadingSlug ? (loadingSlug === 'onepage' ? 'Downloading...' : 'Downloading...') : 'Download'}
+                </button>
               </div>
             </div>
           ))}

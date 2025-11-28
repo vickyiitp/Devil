@@ -8,6 +8,7 @@ from sqlalchemy import select, func, or_, update
 from typing import List, Optional
 
 from database import get_db
+from storage import storage_service
 from models import Blog, Project, Service, Tool, Category, Tag, ResumeDownload
 import os
 from fastapi.responses import FileResponse
@@ -313,6 +314,28 @@ async def download_resume(slug: str, db: AsyncSession = Depends(get_db)):
 
     # Return file
     return FileResponse(file_path, media_type='application/pdf', filename=filename)
+
+
+@router.get('/resumes/presigned/{slug}')
+async def presigned_resume(slug: str):
+    """Return a presigned (SAS) URL for a resume blob in Azure Storage"""
+    slug_map = {
+        'onepage': 'Portfolio (1).pdf',
+        'full': 'full cv.pdf',
+        'technical': 'technical resume.pdf'
+    }
+
+    filename = slug_map.get(slug)
+    if not filename:
+        raise HTTPException(status_code=404, detail='Resume not found')
+
+    blob_name = f"resumes/{filename}"
+
+    try:
+        url = storage_service.generate_presigned_url(blob_name, expiry_seconds=3600)
+        return {"url": url}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to generate presigned URL: {e}")
 
 
 @router.get("/tools/{slug}", response_model=ToolResponse)
